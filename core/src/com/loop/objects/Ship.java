@@ -13,7 +13,7 @@ public class Ship extends Actor {
 
     private Vector2 position;
     private int width, height;
-    private final float defecto=0;
+
 
     public Ship(float x, float y, int width, int height){
         this.width=width;
@@ -41,9 +41,7 @@ public class Ship extends Actor {
         this.height = height;
     }
 
-    public float getDefecto() {
-        return defecto;
-    }
+
 
     public Vector2 getPosition() {
 
@@ -54,9 +52,7 @@ public class Ship extends Actor {
         this.position = position;
     }
 
-    public void rota(float encarado){
-        position.rotate(180);
-    }
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

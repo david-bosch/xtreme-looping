@@ -31,4 +31,18 @@ public class ScrollHandler extends Group {
         addActor(bg);
         addActor(bg_back);
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        // Si algun element està fora de la pantalla, fem un reset de l'element.
+        if (bg.isLeftOfScreen()) {
+            bg.reset(bg_back.getTailX());
+
+        } else if (bg_back.isLeftOfScreen()) {
+            bg_back.reset(bg.getTailX());
+
+        }
+
+    }
 }
