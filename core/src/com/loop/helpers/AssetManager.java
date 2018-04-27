@@ -30,7 +30,7 @@ public class AssetManager {
 
         fondo=new TextureRegion(fondoIMG);
 
-        fondo.flip(false,true);
+        fondo.flip(true,true);
 
 
         //fondo.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);

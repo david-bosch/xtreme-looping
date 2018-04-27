@@ -8,7 +8,7 @@ import com.loop.utils.Settings;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Looping";
+		config.title = "XtremeLooping";
 		config.width = Settings.GAME_WIDTH * 2;
 		config.height = Settings.GAME_HEIGHT * 2;
 		new LwjglApplication(new Main(), config);

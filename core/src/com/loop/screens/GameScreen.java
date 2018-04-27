@@ -1,11 +1,13 @@
 package com.loop.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.loop.control.Control;
 import com.loop.objects.ScrollHandler;
 import com.loop.objects.Ship;
 import com.loop.utils.Settings;
@@ -20,6 +22,7 @@ public class GameScreen implements Screen {
     private ShapeRenderer shapeRenderer;
     private Batch batch;
     private Stage stage;
+    public Ship nau;
 
     public GameScreen(){
         shapeRenderer = new ShapeRenderer();
@@ -31,12 +34,20 @@ public class GameScreen implements Screen {
         StretchViewport viewport = new StretchViewport(Settings.GAME_WIDTH, Settings.GAME_HEIGHT , camera);
         stage = new Stage(viewport);
         batch = stage.getBatch();
+        Control control = new Control();
 
-        Ship nau=new Ship(Settings.SPACECRAFT_STARTX, Settings.SPACECRAFT_STARTY, Settings.SPACECRAFT_WIDTH, Settings.SPACECRAFT_HEIGHT);
         ScrollHandler scroller=new ScrollHandler();
 
         stage.addActor(scroller);
+        stage.addActor(control);
+        control.setPosition(190, 90);
+        Gdx.input.setInputProcessor(stage);
+        Ship nau=new Ship(Settings.SPACECRAFT_STARTX, Settings.SPACECRAFT_STARTY, Settings.SPACECRAFT_WIDTH, Settings.SPACECRAFT_HEIGHT);
+
         stage.addActor(nau);
+
+
+
     }
 
     @Override

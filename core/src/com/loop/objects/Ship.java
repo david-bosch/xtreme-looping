@@ -3,16 +3,18 @@ package com.loop.objects;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.loop.control.Control;
 import com.loop.helpers.AssetManager;
 
 /**
  * Created by infot on 24/04/18.
  */
 
-public class Ship extends Actor {
+public class Ship extends Actor{
 
     private Vector2 position;
     private int width, height;
+    public float grade;
 
 
     public Ship(float x, float y, int width, int height){

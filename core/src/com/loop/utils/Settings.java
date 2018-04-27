@@ -16,5 +16,5 @@ public class Settings {
     public static final int SPACECRAFT_HEIGHT = 10;
     public static final float SPACECRAFT_STARTX = 15;
     public static final float SPACECRAFT_STARTY = GAME_HEIGHT/2 - SPACECRAFT_HEIGHT/2;
-    public static final int BG_SPEED = -100;
+    public static final int BG_SPEED = -10;
 }
