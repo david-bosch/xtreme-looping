@@ -21,9 +21,9 @@ public class GameScreen implements Screen {
 
     private ShapeRenderer shapeRenderer;
     private Batch batch;
-    Control control = new Control();
+    Control control;
     public Stage stage;
-    public Ship nau=control.getNau();
+    public Ship nau;
 
 
     public GameScreen(){
@@ -36,7 +36,8 @@ public class GameScreen implements Screen {
         StretchViewport viewport = new StretchViewport(Settings.GAME_WIDTH, Settings.GAME_HEIGHT , camera);
         stage = new Stage(viewport);
         batch = stage.getBatch();
-
+        nau=new Ship(Settings.SPACECRAFT_STARTX, Settings.SPACECRAFT_STARTY, Settings.SPACECRAFT_WIDTH, Settings.SPACECRAFT_HEIGHT);
+        control=new Control(this);
 
         ScrollHandler scroller=new ScrollHandler();
 

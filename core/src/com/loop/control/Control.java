@@ -3,6 +3,7 @@ package com.loop.control;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -25,28 +26,28 @@ public class Control extends Touchpad{
 
     private static Skin touchpadSkin;
     private static TouchpadStyle touchpadStyle;
-    public Ship nau;
+
+    private Ship nau;
+
     SpriteBatch batch;
     private GameScreen screen;
 
+    int isY=0;
 
-    public Ship getNau() {
-        return nau;
-    }
 
-    public void setNau(Ship nau) {
-        this.nau = nau;
-    }
 
-    public Control() {
+
+    public Control(GameScreen screen) {
         super(2, Control.getTouchPadStyle());
 
 
         setBounds(50, 100,40, 40);
-        nau=new Ship(Settings.SPACECRAFT_STARTX, Settings.SPACECRAFT_STARTY, Settings.SPACECRAFT_WIDTH, Settings.SPACECRAFT_HEIGHT);
-        batch=new SpriteBatch();
 
+        batch=new SpriteBatch();
+        nau=screen.nau;
     }
+
+
 
 
     private static TouchpadStyle getTouchPadStyle(){
@@ -65,16 +66,21 @@ public class Control extends Touchpad{
         super.act(delta);
         if(isTouched()){
             // Mover al personaje o cualquier otra cosa que quieras hacer
+            // Posem un llindar per evitar gestionar events quan el dit està quiet
+            if (Math.abs(isY - getKnobPercentY()) > 2)
+                Gdx.app.log("LifeCycle", "getKnobPercentY()"); //No esborrar aquesta linea por tu padre
+                // Si la Y és major que la que tenim
+                // guardada és que va cap avall
+                if (isY < getKnobPercentY()) {
+                    nau.goDown();
 
 
-            nau.getNave().setRotation(0);
+                } else {
+// En cas contrari cap amunt
+                    nau.goUp();
+                }
 
 
-            nau.setPosition(nau.getX()+getKnobX()*Settings.SPACECRAFT_VELOCITY,nau.getY()+getKnobY()*Settings.SPACECRAFT_VELOCITY);
-            nau.act(Gdx.graphics.getDeltaTime());
-            batch.begin();
-            nau.draw(batch,1);
-            batch.end();
 
 
 
@@ -82,7 +88,7 @@ public class Control extends Touchpad{
 
         }
         else{
-
+            nau.goStraight();
         }
     }
 

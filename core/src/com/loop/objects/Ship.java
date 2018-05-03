@@ -98,4 +98,17 @@ public class Ship extends Actor{
 
 
     }
+    public void goUp() {
+        direction = SPACECRAFT_UP;
+    }
+
+    // Canviem la direcció de l'Spacecraft: Baixa
+    public void goDown() {
+        direction = SPACECRAFT_DOWN;
+    }
+
+    // Posem l'Spacecraft al seu estat original
+    public void goStraight() {
+        direction = SPACECRAFT_STRAIGHT;
+    }
 }
