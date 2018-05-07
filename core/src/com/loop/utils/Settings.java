@@ -11,10 +11,10 @@ public class Settings {
     public static final int GAME_HEIGHT = 135;
 
     // Propietats de la nau
-    public static final float SPACECRAFT_VELOCITY = 50;
-    public static final int SPACECRAFT_WIDTH = 26;
-    public static final int SPACECRAFT_HEIGHT = 10;
-    public static final float SPACECRAFT_STARTX = 15;
+    public static final float SPACECRAFT_VELOCITY = 0;
+    public static final int SPACECRAFT_WIDTH = 16;
+    public static final int SPACECRAFT_HEIGHT = 7;
+    public static final float SPACECRAFT_STARTX = 70;
     public static final float SPACECRAFT_STARTY = GAME_HEIGHT/2 - SPACECRAFT_HEIGHT/2;
-    public static final int BG_SPEED = -10;
+    public static final int BG_SPEED = -50;
 }

@@ -33,6 +33,8 @@ public class Control extends Touchpad{
     private GameScreen screen;
 
     int isY=0;
+    private Sprite nive;
+
 
 
 
@@ -73,6 +75,7 @@ public class Control extends Touchpad{
                 // guardada és que va cap avall
                 if (isY < getKnobPercentY()) {
                     nau.goDown();
+
 
 
                 } else {
