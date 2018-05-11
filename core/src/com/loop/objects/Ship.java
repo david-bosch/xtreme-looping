@@ -34,6 +34,11 @@ public class Ship extends Actor{
     public static final int SPACECRAFT_RIGHT = 4;
     private int direction;
     private float acelera=0;
+    private float desceleraUP=-75.60014f;
+    private float desceleraUPFinal=-144.40009f;
+    private float desceleraDown=75.60014f;
+    private float desceleraDownFinal=144.40009f;
+    private float descelera=0;
 
 
     public Ship(float x, float y, int width, int height){
@@ -76,36 +81,88 @@ public class Ship extends Actor{
 
 
     public void act(float delta){
+      /*  Gdx.app.log("rotacio+++++++++++++", ""+AssetManager.lanave.getRotation());
+        Gdx.app.log("tirali--------------", ""+acelera);
+        Gdx.app.log("destirali///////////", ""+desceleraUP);*/
+        Gdx.app.log("destirali///////////", ""+desceleraDown);
+
         if(AssetManager.lanave.getRotation()==verticalUp) {
             verticalUpBloq=true;
         }else{
             verticalUpBloq=false;
         }
 
+
+
         AssetManager.lanave.rotate(grade);
 
         if((AssetManager.lanave.getRotation()==359)||(AssetManager.lanave.getRotation()==-359)){//Aquest if s'encarrega que els graus siguin sempre els matiexos
             AssetManager.lanave.setRotation(0);
+            acelera=0;
+            desceleraUP=-75.60014f;
+            desceleraUPFinal=-144.40009f;
+
+           desceleraDown=75.60014f;
+            desceleraDownFinal=144.40009f;
         }
-        if((AssetManager.lanave.getRotation()<0)){ //Regula la velocitat ascendent
+
+
+        ///Regulació de ascendencia i decendencia al girar
+
+        //regulacio ascendent
+        if((AssetManager.lanave.getRotation()<0)&&(AssetManager.lanave.getRotation()>=-90)){ //Regula la velocitat ascendent primer quart
             if (this.position.y - Settings.SPACECRAFT_VELOCITY-acelera * delta >= 0) {
                 this.position.y -= Settings.SPACECRAFT_VELOCITY-acelera * delta;
 
                 }
 
 
-      } /*else if((AssetManager.lanave.getRotation()<-90)){
-            if (this.position.y - Settings.SPACECRAFT_VELOCITY+AssetManager.lanave.getRotation() * delta >= 0) {
-                this.position.y -= Settings.SPACECRAFT_VELOCITY+AssetManager.lanave.getRotation() * delta;}
+      } else if((AssetManager.lanave.getRotation()<-90)&&(AssetManager.lanave.getRotation()>=-180)){
+            if (this.position.y - Settings.SPACECRAFT_VELOCITY-desceleraUP * delta >= 0) {
+                this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;}
 
 
-        }*/
+        } else if((AssetManager.lanave.getRotation()<-180)&&(AssetManager.lanave.getRotation()>=-270)){
+        if (this.position.y - Settings.SPACECRAFT_VELOCITY-desceleraUP * delta >= 0) {
+            this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;}
 
-        else if(AssetManager.lanave.getRotation()>0){//Regula la velocitat descendent
+
+
+    } else if((AssetManager.lanave.getRotation()<-270)&&(AssetManager.lanave.getRotation()>=-358)){
+            if (this.position.y - Settings.SPACECRAFT_VELOCITY+desceleraUPFinal * delta >= 0) {
+                this.position.y -= Settings.SPACECRAFT_VELOCITY+desceleraUPFinal * delta;}
+
+    }
+
+
+        else if((AssetManager.lanave.getRotation()>0)&&(AssetManager.lanave.getRotation()<=90)){//Regula la velocitat descendent
             if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+acelera * delta <= Settings.GAME_HEIGHT) {
                 this.position.y += Settings.SPACECRAFT_VELOCITY+acelera * delta;}
         }
 
+
+
+     else if((AssetManager.lanave.getRotation()>90)&&(AssetManager.lanave.getRotation()>=180)){
+            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta <= Settings.GAME_HEIGHT) {
+                this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;}
+
+
+    } else if((AssetManager.lanave.getRotation()>180)&&(AssetManager.lanave.getRotation()>=270)){
+            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta <= Settings.GAME_HEIGHT) {
+                this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;}
+
+
+
+    } else if((AssetManager.lanave.getRotation()>270)&&(AssetManager.lanave.getRotation()>=358)){
+            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta <= Settings.GAME_HEIGHT) {
+                this.position.y += Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta;}
+
+    }
+
+
+
+        ///Regulació de ascendencia i decendencia al girar
+//---------------------------------------------------------------------------------//
 
         switch (direction) {
             case SPACECRAFT_UP:
@@ -114,7 +171,10 @@ public class Ship extends Actor{
                         this.position.y -= Settings.SPACECRAFT_VELOCITY * delta;*/
                         grade=-1;
                         acelera=acelera-0.4f;
-
+                        desceleraUP=desceleraUP+0.4f;
+                        desceleraUPFinal=desceleraUPFinal+0.4f;
+                        desceleraDown=desceleraDown+0.4f;
+                        desceleraDownFinal=desceleraDownFinal+0.4f;
                    }
          //       }else{
               //      break;
@@ -127,6 +187,12 @@ public class Ship extends Actor{
                 }*/
                 grade=+1;
                 acelera=acelera+0.4f;
+                desceleraUP=desceleraUP-0.4f;
+
+                desceleraUPFinal=desceleraUPFinal-0.4f;
+                desceleraDown=desceleraDown-0.4f;
+                desceleraDownFinal=desceleraDownFinal-0.4f;
+
                 break;
             case SPACECRAFT_STRAIGHT:
                 break;
