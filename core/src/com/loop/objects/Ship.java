@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.loop.control.Control;
@@ -38,13 +39,15 @@ public class Ship extends Actor{
     private float desceleraUPFinal=-144.40009f;
     private float desceleraDown=75.60014f;
     private float desceleraDownFinal=144.40009f;
-    private float descelera=0;
+
+    private Rectangle collisionRect;
 
 
     public Ship(float x, float y, int width, int height){
         this.width=width;
         this.height=height;
         this.position=new Vector2(x,y);
+        collisionRect = new Rectangle();
 
 
     }
@@ -81,17 +84,18 @@ public class Ship extends Actor{
 
 
     public void act(float delta){
-      /*  Gdx.app.log("rotacio+++++++++++++", ""+AssetManager.lanave.getRotation());
-        Gdx.app.log("tirali--------------", ""+acelera);
+  //      Gdx.app.log("rotacio+++++++++++++", ""+AssetManager.lanave.getRotation());
+      /*  Gdx.app.log("tirali--------------", ""+acelera);
         Gdx.app.log("destirali///////////", ""+desceleraUP);*/
-        Gdx.app.log("destirali///////////", ""+desceleraDown);
+      //  Gdx.app.log("destirali///////////", ""+desceleraDown);
 
         if(AssetManager.lanave.getRotation()==verticalUp) {
             verticalUpBloq=true;
         }else{
             verticalUpBloq=false;
         }
-
+        collisionRect.set(position.x, position.y + 3, width, 10);
+        setBounds(position.x, position.y, width, height);
 
 
         AssetManager.lanave.rotate(grade);
@@ -142,18 +146,20 @@ public class Ship extends Actor{
 
 
 
-     else if((AssetManager.lanave.getRotation()>90)&&(AssetManager.lanave.getRotation()>=180)){
-            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta <= Settings.GAME_HEIGHT) {
+     else if((AssetManager.lanave.getRotation()>90)&&(AssetManager.lanave.getRotation()<=180)){
+            if (this.position.y - Settings.SPACECRAFT_VELOCITY-desceleraDown * delta>=0) {
+                this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraDown * delta;
+
+            }
+
+
+    } else if((AssetManager.lanave.getRotation()>180)&&(AssetManager.lanave.getRotation()<=270)){
+            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta>=0) {
                 this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;}
 
 
-    } else if((AssetManager.lanave.getRotation()>180)&&(AssetManager.lanave.getRotation()>=270)){
-            if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta <= Settings.GAME_HEIGHT) {
-                this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;}
 
-
-
-    } else if((AssetManager.lanave.getRotation()>270)&&(AssetManager.lanave.getRotation()>=358)){
+    } else if((AssetManager.lanave.getRotation()>270)&&(AssetManager.lanave.getRotation()<=358)){
             if (this.position.y + height + Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta <= Settings.GAME_HEIGHT) {
                 this.position.y += Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta;}
 
@@ -197,6 +203,8 @@ public class Ship extends Actor{
             case SPACECRAFT_STRAIGHT:
                 break;
         }
+
+
     }
 
 
@@ -235,5 +243,9 @@ public class Ship extends Actor{
     public void goStraight() {
         direction = SPACECRAFT_STRAIGHT;
         grade=0;
+    }
+
+    public Rectangle getCollisionRect() {
+        return collisionRect;
     }
 }

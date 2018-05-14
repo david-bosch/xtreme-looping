@@ -14,8 +14,8 @@ public class ScrollHandler extends Group {
     // Fons de pantalla
     Background bg, bg_back;
 
-    // Asteroides
-    int numAsteroids;
+
+
 
 
     // Objecte random

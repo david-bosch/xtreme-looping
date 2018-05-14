@@ -1,6 +1,8 @@
 package com.loop.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,6 +20,9 @@ public class AssetManager {
     public static Texture fondoIMG;
     public static TextureRegion fondo;
     public static Sprite lanave;
+    public static Music music;
+    public static Sound boom;
+    public static Sound record;
 
 
     public static void load(){
@@ -31,10 +36,14 @@ public class AssetManager {
 
         fondo=new TextureRegion(fondoIMG);
 
-        fondo.flip(true,true);
+        fondo.flip(false,false);
 
 
         //fondo.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("tema.wav"));
+        music.setVolume(0.2f);
+        music.setLooping(true);
 
 
     }
@@ -42,5 +51,6 @@ public class AssetManager {
         spaceship.dispose();
         fondoIMG.dispose();
         //fondo.dispose();
+        music.dispose();
     }
 }

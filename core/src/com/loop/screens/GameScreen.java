@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.loop.control.Control;
+import com.loop.helpers.AssetManager;
 import com.loop.objects.ScrollHandler;
 import com.loop.objects.Ship;
 import com.loop.utils.Settings;
@@ -27,6 +28,7 @@ public class GameScreen implements Screen {
 
 
     public GameScreen(){
+        AssetManager.music.play();
         shapeRenderer = new ShapeRenderer();
 
 
