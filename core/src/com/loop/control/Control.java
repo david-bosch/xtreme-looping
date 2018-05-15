@@ -69,7 +69,7 @@ public class Control extends Touchpad{
         if(isTouched()){
             // Mover al personaje o cualquier otra cosa que quieras hacer
             // Posem un llindar per evitar gestionar events quan el dit està quiet
-            if (Math.abs(isY - getKnobPercentY()) > 2)
+            if (Math.abs(isY - getKnobPercentY()) > 30)
                 Gdx.app.log("LifeCycle", "getKnobPercentY()"); //No esborrar aquesta linea por tu padre
                 // Si la Y és major que la que tenim
                 // guardada és que va cap avall

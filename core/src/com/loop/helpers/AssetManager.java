@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+import com.loop.objects.Disturbed;
 
 
 /**
@@ -23,7 +24,11 @@ public class AssetManager {
     public static Music music;
     public static Sound boom;
     public static Sound record;
+    public static Sprite face;
+    public static Texture face1;
 
+    public static TextureRegion[] explosion;
+    public static Animation explosionAnim;
 
     public static void load(){
 
@@ -31,6 +36,9 @@ public class AssetManager {
       //  spaceship.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
         lanave=new Sprite(spaceship);
 
+        face1=new Texture(Gdx.files.internal("punt.png"));
+
+        face=new Sprite(face1);
         fondoIMG = new Texture(Gdx.files.internal("fondo.png"));
         fondoIMG.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
 
@@ -45,12 +53,19 @@ public class AssetManager {
         music.setVolume(0.2f);
         music.setLooping(true);
 
+     //   boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
+
+      //  record = Gdx.audio.newSound(Gdx.files.internal("record.wav"));
+
+
+
 
     }
     public static void dispose(){
         spaceship.dispose();
         fondoIMG.dispose();
-        //fondo.dispose();
+     //   boom.dispose();
         music.dispose();
+    //    record.dispose();
     }
 }

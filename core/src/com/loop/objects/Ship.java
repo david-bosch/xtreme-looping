@@ -117,7 +117,7 @@ public class Ship extends Actor{
         if((AssetManager.lanave.getRotation()<0)&&(AssetManager.lanave.getRotation()>=-90)){ //Regula la velocitat ascendent primer quart
             if (this.position.y - Settings.SPACECRAFT_VELOCITY-acelera * delta >= 0) {
                 this.position.y -= Settings.SPACECRAFT_VELOCITY-acelera * delta;
-
+                Settings.VELOCITY_HAZZARD=50;
                 }
 
 

@@ -10,4 +10,6 @@ public class Obstacle extends  Scrollable{
     public Obstacle(float x, float y, float width, float height, float velocity) {
         super(x, y, width, height, velocity);
     }
+
+
 }
