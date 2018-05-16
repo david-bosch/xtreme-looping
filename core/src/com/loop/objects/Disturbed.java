@@ -1,5 +1,6 @@
 package com.loop.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
@@ -19,7 +20,7 @@ public class Disturbed extends Obstacle{
     private Circle hitbox;
     Random r;
     int pertur;
-    private Vector2 position;
+
     private ArrayList<Disturbed> caras;
 
 
@@ -49,13 +50,15 @@ public class Disturbed extends Obstacle{
         // Actualitzem el cercle de col·lisions (punt central de l'asteroid i el radi.
         hitbox.set(position.x + width / 2.0f, position.y + width / 2.0f, width / 2.0f);
 
+        Gdx.app.log("LifeCycle", ""+Settings.VELOCITY_HAZZARD);
+        setVelocity(Settings.VELOCITY_HAZZARD);
 
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        batch.draw(AssetManager.face, position.x, position.y, this.getOriginX(), this.getOriginY(), width, height, this.getScaleX(), this.getScaleY(), this.getRotation());
+        batch.draw(AssetManager.face, position.x, position.y,width, height);
     }
 
 

@@ -109,6 +109,9 @@ public class Ship extends Actor{
            desceleraDown=75.60014f;
             desceleraDownFinal=144.40009f;
         }
+        if(AssetManager.lanave.getRotation()==0){
+            Settings.VELOCITY_HAZZARD=-50;
+        }
 
 
         ///Regulació de ascendencia i decendencia al girar
@@ -117,31 +120,53 @@ public class Ship extends Actor{
         if((AssetManager.lanave.getRotation()<0)&&(AssetManager.lanave.getRotation()>=-90)){ //Regula la velocitat ascendent primer quart
             if (this.position.y - Settings.SPACECRAFT_VELOCITY-acelera * delta >= 0) {
                 this.position.y -= Settings.SPACECRAFT_VELOCITY-acelera * delta;
-                Settings.VELOCITY_HAZZARD=50;
-                }
 
+                }
+            Settings.VELOCITY_HAZZARD=-25;
+            if(AssetManager.lanave.getRotation()==-90){
+                Settings.VELOCITY_HAZZARD=0;
+            }
 
       } else if((AssetManager.lanave.getRotation()<-90)&&(AssetManager.lanave.getRotation()>=-180)){
             if (this.position.y - Settings.SPACECRAFT_VELOCITY-desceleraUP * delta >= 0) {
-                this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;}
+                this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;
 
+            }
+            Settings.VELOCITY_HAZZARD=25;
+            if(AssetManager.lanave.getRotation()==-180){
+                Settings.VELOCITY_HAZZARD=50;
+            }
 
         } else if((AssetManager.lanave.getRotation()<-180)&&(AssetManager.lanave.getRotation()>=-270)){
         if (this.position.y - Settings.SPACECRAFT_VELOCITY-desceleraUP * delta >= 0) {
-            this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;}
+            this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraUP * delta;
 
+        }
 
+            Settings.VELOCITY_HAZZARD=25;
+            if(AssetManager.lanave.getRotation()==-270){
+                Settings.VELOCITY_HAZZARD=0;
+            }
 
     } else if((AssetManager.lanave.getRotation()<-270)&&(AssetManager.lanave.getRotation()>=-358)){
             if (this.position.y - Settings.SPACECRAFT_VELOCITY+desceleraUPFinal * delta >= 0) {
-                this.position.y -= Settings.SPACECRAFT_VELOCITY+desceleraUPFinal * delta;}
+                this.position.y -= Settings.SPACECRAFT_VELOCITY+desceleraUPFinal * delta;
 
+            }
+            Settings.VELOCITY_HAZZARD=-25;
     }
 
 
         else if((AssetManager.lanave.getRotation()>0)&&(AssetManager.lanave.getRotation()<=90)){//Regula la velocitat descendent
             if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+acelera * delta <= Settings.GAME_HEIGHT) {
-                this.position.y += Settings.SPACECRAFT_VELOCITY+acelera * delta;}
+                this.position.y += Settings.SPACECRAFT_VELOCITY+acelera * delta;
+
+            }
+
+            Settings.VELOCITY_HAZZARD=-25;
+            if(AssetManager.lanave.getRotation()==90){
+                Settings.VELOCITY_HAZZARD=0;
+            }
         }
 
 
@@ -151,24 +176,38 @@ public class Ship extends Actor{
                 this.position.y -= Settings.SPACECRAFT_VELOCITY-desceleraDown * delta;
 
             }
-
+            Settings.VELOCITY_HAZZARD=25;
+            if(AssetManager.lanave.getRotation()==180){
+                Settings.VELOCITY_HAZZARD=50;
+            }
 
     } else if((AssetManager.lanave.getRotation()>180)&&(AssetManager.lanave.getRotation()<=270)){
             if (this.position.y + height + Settings.SPACECRAFT_VELOCITY+desceleraDown * delta>=0) {
-                this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;}
+                this.position.y += Settings.SPACECRAFT_VELOCITY+desceleraDown * delta;
+
+            }
+
+            Settings.VELOCITY_HAZZARD=25;
+            if(AssetManager.lanave.getRotation()==270){
+                Settings.VELOCITY_HAZZARD=0;
+            }
 
 
 
     } else if((AssetManager.lanave.getRotation()>270)&&(AssetManager.lanave.getRotation()<=358)){
             if (this.position.y + height + Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta <= Settings.GAME_HEIGHT) {
-                this.position.y += Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta;}
+                this.position.y += Settings.SPACECRAFT_VELOCITY-desceleraDownFinal * delta;
 
+                }
+
+            Settings.VELOCITY_HAZZARD=-25;
     }
 
 
 
         ///Regulació de ascendencia i decendencia al girar
 //---------------------------------------------------------------------------------//
+
 
         switch (direction) {
             case SPACECRAFT_UP:
@@ -181,6 +220,7 @@ public class Ship extends Actor{
                         desceleraUPFinal=desceleraUPFinal+0.4f;
                         desceleraDown=desceleraDown+0.4f;
                         desceleraDownFinal=desceleraDownFinal+0.4f;
+
                    }
          //       }else{
               //      break;

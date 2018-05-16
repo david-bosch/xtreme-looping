@@ -18,7 +18,7 @@ public class Settings {
     public static final float SPACECRAFT_STARTY = GAME_HEIGHT/2 - SPACECRAFT_HEIGHT/2;
 
     //SCROLLABLE
-    public static final int BG_SPEED = -50;
+    public static int BG_SPEED = 0;
     public static final int GAP = 75;
 
     //propietats dels obstacles
@@ -26,5 +26,5 @@ public class Settings {
     public static final float MAX_FACE = 1.5f;
     public static final float MIN_FACE = 0.5f;
 
-    public static int VELOCITY_HAZZARD;
+    public static float VELOCITY_HAZZARD=-50;
 }

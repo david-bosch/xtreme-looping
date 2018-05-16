@@ -25,6 +25,7 @@ public class GameScreen implements Screen {
     Control control;
     public Stage stage;
     public Ship nau;
+    ScrollHandler scroller;
 
 
     public GameScreen(){
@@ -41,7 +42,7 @@ public class GameScreen implements Screen {
         nau=new Ship(Settings.SPACECRAFT_STARTX, Settings.SPACECRAFT_STARTY, Settings.SPACECRAFT_WIDTH, Settings.SPACECRAFT_HEIGHT);
         control=new Control(this);
 
-        ScrollHandler scroller=new ScrollHandler();
+         scroller=new ScrollHandler();
 
         stage.addActor(scroller);
         stage.addActor(control);

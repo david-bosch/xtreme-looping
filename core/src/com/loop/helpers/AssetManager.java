@@ -36,9 +36,10 @@ public class AssetManager {
       //  spaceship.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
         lanave=new Sprite(spaceship);
 
-        face1=new Texture(Gdx.files.internal("punt.png"));
+        face1=new Texture(Gdx.files.internal("disturbed_hazzard.png"));
 
         face=new Sprite(face1);
+        face.flip(false,true);
         fondoIMG = new Texture(Gdx.files.internal("fondo.png"));
         fondoIMG.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
 

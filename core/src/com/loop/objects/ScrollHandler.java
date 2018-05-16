@@ -25,7 +25,7 @@ public class ScrollHandler extends Group {
     public ScrollHandler() {
 
         //Creem els dos fons
-        bg = new Background(0, 0, Settings.GAME_WIDTH * 2, Settings.GAME_HEIGHT, Settings.BG_SPEED);
+       bg = new Background(0, 0, Settings.GAME_WIDTH * 2, Settings.GAME_HEIGHT, Settings.BG_SPEED);
         bg_back = new Background(bg.getTailX(), 0, Settings.GAME_WIDTH * 2, Settings.GAME_HEIGHT, Settings.BG_SPEED);
         //Afegim els fons (actors) al grup
         addActor(bg);
@@ -33,12 +33,12 @@ public class ScrollHandler extends Group {
 
         r = new Random();
 
-        num = 3;
+        num = 40;
         float newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MAX_FACE) * 34;
         // Creem l'ArrayList
         faces = new ArrayList<Disturbed>();
 
-        Disturbed cara = new Disturbed(Settings.GAME_WIDTH, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, 80);
+        Disturbed cara = new Disturbed(Settings.GAME_WIDTH, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
         faces.add(cara);
         addActor(cara);
 
@@ -46,11 +46,11 @@ public class ScrollHandler extends Group {
             // Creem la mida al·leatòria
             newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MIN_FACE) * 34;
             // Afegim l'asteroid.
-            cara = new Disturbed(faces.get(faces.size() - 1).getTailX() + Settings.GAP, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, 80);
+            cara = new Disturbed(faces.get(faces.size() - 1).getTailX() + Settings.GAP, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
             // Afegim l'asteroide a l'ArrayList
             faces.add(cara);
             // Afegim l'asteroide al grup d'actors
-            addActor(cara);
+            addActor(faces.get(i));
         }
 
 

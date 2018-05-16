@@ -53,6 +53,14 @@ public class Scrollable extends Actor {
         return height;
     }
 
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(float velocity) {
+        this.velocity = velocity;
+    }
+
     public void act(float delta) {
 
             // Desplacem l'objecte en l'eix d'X
