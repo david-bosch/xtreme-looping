@@ -68,7 +68,9 @@ public class GameScreen implements Screen {
 
             stage.draw();
             stage.act(delta);
-
+           if(scroller.collides(nau)){
+               Gdx.app.log("App", "Explosió");
+           }
     }
 
     @Override

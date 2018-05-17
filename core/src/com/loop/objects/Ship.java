@@ -94,7 +94,7 @@ public class Ship extends Actor{
         }else{
             verticalUpBloq=false;
         }
-        collisionRect.set(position.x, position.y + 3, width, 10);
+        collisionRect.set(position.x, position.y, width, height);
         setBounds(position.x, position.y, width, height);
 
 

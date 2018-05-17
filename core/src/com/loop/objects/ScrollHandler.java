@@ -17,6 +17,7 @@ public class ScrollHandler extends Group {
     Background bg, bg_back;
     int num;
     private ArrayList<Disturbed> faces;
+    private ArrayList<Obstacle> barrash;
 
 
     // Objecte random
@@ -35,6 +36,7 @@ public class ScrollHandler extends Group {
 
         num = 40;
         float newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MAX_FACE) * 34;
+
         // Creem l'ArrayList
         faces = new ArrayList<Disturbed>();
 
@@ -45,6 +47,11 @@ public class ScrollHandler extends Group {
         for (int i = 1; i < num; i++) {
             // Creem la mida al·leatòria
             newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MIN_FACE) * 34;
+
+            if(i==5){
+                BarraH barra=new BarraH(faces.get(faces.size() - 1).getTailX() + Settings.GAP, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
+
+            }
             // Afegim l'asteroid.
             cara = new Disturbed(faces.get(faces.size() - 1).getTailX() + Settings.GAP, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
             // Afegim l'asteroide a l'ArrayList
@@ -68,6 +75,19 @@ public class ScrollHandler extends Group {
 
         }
 
+
+
+    }
+
+    public boolean collides(Ship nave) {
+
+// Comprovem les col·lisions entre cada asteroide i la nau
+        for (Disturbed dis : faces) {
+            if (dis.collides(nave)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -27,6 +27,12 @@ public class AssetManager {
     public static Sprite face;
     public static Texture face1;
 
+    public static Sprite barraH;
+
+    public static Sprite barraV;
+
+    public static Texture barra;
+
     public static TextureRegion[] explosion;
     public static Animation explosionAnim;
 
@@ -37,6 +43,11 @@ public class AssetManager {
         lanave=new Sprite(spaceship);
 
         face1=new Texture(Gdx.files.internal("disturbed_hazzard.png"));
+
+        barra=new Texture(Gdx.files.internal("pared_h.png"));
+
+        barraH=new Sprite(barra);
+
 
         face=new Sprite(face1);
         face.flip(false,true);
