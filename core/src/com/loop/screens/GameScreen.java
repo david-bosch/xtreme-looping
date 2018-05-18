@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -19,13 +20,15 @@ import com.loop.utils.Settings;
 
 public class GameScreen implements Screen {
 
-
+    Boolean gameOver = false;
+    Boolean endGame = false;
     private ShapeRenderer shapeRenderer;
     private Batch batch;
     Control control;
     public Stage stage;
     public Ship nau;
     ScrollHandler scroller;
+    private float explosionTime = 0;
 
 
     public GameScreen(){
@@ -53,7 +56,7 @@ public class GameScreen implements Screen {
 
         stage.addActor(nau);
 
-
+        nau.setName("theship");
 
     }
 
@@ -68,9 +71,32 @@ public class GameScreen implements Screen {
 
             stage.draw();
             stage.act(delta);
-           if(scroller.collides(nau)){
-               Gdx.app.log("App", "Explosió");
-           }
+
+
+            if(scroller.end(nau)){
+                Gdx.app.log("App", "Succes as fuck");
+                endGame=true;
+            }
+            if (scroller.collides(nau)) {
+                //  AssetManager.boom.play();
+
+
+
+//                stage.getRoot().findActor("theship").remove();
+
+                gameOver = true;
+            }
+        if(gameOver){
+            // Si hi ha hagut col·lisió: reproduïm l'explosió
+            batch.begin();
+            batch.draw((TextureRegion) AssetManager.explosionAnim.getKeyFrame(explosionTime, false), (nau.getX() + nau.getWidth() / 2) - 32, nau.getY() + nau.getHeight() / 2 - 32, 64, 64);
+            batch.end();
+
+            explosionTime += delta;
+       //     stage.getRoot().findActor("theship").remove();
+        }
+
+
     }
 
     @Override
@@ -97,4 +123,6 @@ public class GameScreen implements Screen {
     public void dispose() {
 
     }
+
+
 }

@@ -21,13 +21,21 @@ public class Settings {
     public static int BG_SPEED = 0;
     public static final int GAP = 75;
 
+    public static final int GAP_CUBE = 20;
+
     //propietats dels obstacles
 
     public static final float MAX_FACE = 1.5f;
     public static final float MIN_FACE = 0.5f;
 
-    public static final float MAX_BARRAH = 5.5f;
-    public static final float MIN_BARRAH = 1.5f;
+    //public static final float MAX_BARRAH = 5.5f;
+    //public static final float MIN_BARRAH = 1.5f;
+
+    public static final float barraXh = 200f;
+    public static final float Barrayh = 30f;
+    public static final float barraXv = 30f;
+    public static final float Barrayv = 100f;
+
 
     public static float VELOCITY_HAZZARD=-50;
 }

@@ -26,37 +26,60 @@ public class AssetManager {
     public static Sound record;
     public static Sprite face;
     public static Texture face1;
-
+    public static Texture sheet;
     public static Sprite barraH;
+    public static Sprite barraup;
+    public static Texture barraup1;
 
-    public static Sprite barraV;
+    public static Sprite barrap;
+    public static Texture barrap1;
+
+    public static Sprite meta;
+    public static Texture meta1;
+
+
 
     public static Texture barra;
 
     public static TextureRegion[] explosion;
     public static Animation explosionAnim;
 
-    public static void load(){
+    public static void load() {
 
-        spaceship=new Texture(Gdx.files.internal("ship_tr.png"));
-      //  spaceship.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
-        lanave=new Sprite(spaceship);
+        sheet=new Texture(Gdx.files.internal("sheet.png"));
 
-        face1=new Texture(Gdx.files.internal("disturbed_hazzard.png"));
+        spaceship = new Texture(Gdx.files.internal("ship_tr.png"));
+        //  spaceship.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
+        lanave = new Sprite(spaceship);
 
-        barra=new Texture(Gdx.files.internal("pared_h.png"));
+        face1 = new Texture(Gdx.files.internal("disturbed_hazzard.png"));
 
-        barraH=new Sprite(barra);
+        barra = new Texture(Gdx.files.internal("pared_h.png"));
+
+        barraH = new Sprite(barra);
+
+        barrap1 = new Texture(Gdx.files.internal("pared.png"));
+
+        barrap = new Sprite(barrap1);
+        barrap.flip(false, true);
+
+        barraup1 = new Texture(Gdx.files.internal("TopBottom.png"));
+        barraup = new Sprite(barraup1);
+
+        meta1 = new Texture(Gdx.files.internal("meta.png"));
+        meta = new Sprite(meta1);
+
+        meta.flip(false, true);
 
 
-        face=new Sprite(face1);
-        face.flip(false,true);
+        face = new Sprite(face1);
+        face.flip(false, true);
         fondoIMG = new Texture(Gdx.files.internal("fondo.png"));
-        fondoIMG.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
+        fondoIMG.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
-        fondo=new TextureRegion(fondoIMG);
+        fondo = new TextureRegion(fondoIMG);
 
-        fondo.flip(false,false);
+        fondo.flip(false, false);
 
 
         //fondo.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
@@ -65,18 +88,30 @@ public class AssetManager {
         music.setVolume(0.2f);
         music.setLooping(true);
 
-     //   boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
+        //  boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
 
-      //  record = Gdx.audio.newSound(Gdx.files.internal("record.wav"));
-
-
+        //  record = Gdx.audio.newSound(Gdx.files.internal("record.wav"));
 
 
+        // Creem els 16 estats de l'explosió
+        explosion = new TextureRegion[16];
+
+// Carreguem els 16 estats de l'explosió
+        int index = 0;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 8; j++) {
+                explosion[index++] = new TextureRegion(sheet, j * 64, i * 64 + 49, 64, 64);
+                explosion[index - 1].flip(false, true);
+            }
+
+
+        }
+        explosionAnim = new Animation(0.04f, explosion);
     }
     public static void dispose(){
         spaceship.dispose();
         fondoIMG.dispose();
-     //   boom.dispose();
+      //  boom.dispose();
         music.dispose();
     //    record.dispose();
     }
