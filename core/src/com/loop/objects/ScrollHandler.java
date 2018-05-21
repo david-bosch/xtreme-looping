@@ -15,10 +15,12 @@ public class ScrollHandler extends Group {
 
     // Fons de pantalla
     Background bg, bg_back;
-    int num, num2;
+    int num, num2, num3;
     private ArrayList<Disturbed> faces;
     private ArrayList<BarraH> barrash;
+    private ArrayList<Esferic> bola;
     BarraP barrap;
+    Esferic ball;
 
     TopBottom top,top2,abajo,abajo2;
     Meta fin;
@@ -49,20 +51,23 @@ public class ScrollHandler extends Group {
         addActor(abajo);
         addActor(abajo2);
 
-        barrap=new BarraP(0,0,50,Settings.GAME_HEIGHT,Settings.VELOCITY_HAZZARD);
+        barrap=new BarraP(-10,0,50,Settings.GAME_HEIGHT,Settings.VELOCITY_HAZZARD);
 
         addActor(barrap);
         r = new Random();
 
         num = 70;
         num2=10;
+        num3=30;
         float newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MAX_FACE) * 34;
 
         // Creem l'ArrayList
         faces = new ArrayList<Disturbed>();
         barrash=new ArrayList<BarraH>();
+        bola=new ArrayList<Esferic>();
 
-        Disturbed cara = new Disturbed(Settings.GAME_WIDTH, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
+
+        Disturbed cara = new Disturbed(Settings.GAME_WIDTH, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), 20, 20, Settings.VELOCITY_HAZZARD);
         faces.add(cara);
         addActor(cara);
 
@@ -80,6 +85,10 @@ public class ScrollHandler extends Group {
             faces.add(cara);
             // Afegim l'asteroide al grup d'actors
             addActor(faces.get(i));
+            if((i==10)||(i==50)){
+
+            cara = new Disturbed(faces.get(faces.size() - 1).getTailX() + Settings.GAP_CUBE, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD*2);
+            addActor(cara);}
         }
 
         BarraH barra=new BarraH(faces.get(faces.size() - 1).getTailX() + Settings.GAP, 80, Settings.barraXh, Settings.Barrayh, Settings.VELOCITY_HAZZARD);
@@ -103,7 +112,22 @@ public class ScrollHandler extends Group {
 
         }
 
-        fin=new Meta(barrash.get(barrash.size() - 1).getTailX() + Settings.GAP,0,50,Settings.GAME_HEIGHT,Settings.VELOCITY_HAZZARD);
+        ball =new Esferic(barrash.get(barrash.size() - 1).getTailX() + Settings.GAP, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), 20, 20, Settings.VELOCITY_HAZZARD);
+        bola.add(ball);
+        addActor(ball);
+
+        for (int i = 1; i < num3; i++) {
+            newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MIN_FACE) * 34;
+
+            ball =new Esferic(bola.get(bola.size() - 1).getTailX() + Settings.GAP_CUBE, r.nextInt(Settings.GAME_HEIGHT - (int) newSize), newSize, newSize, Settings.VELOCITY_HAZZARD);
+            bola.add(ball);
+            addActor(ball);
+        }
+
+
+
+
+        fin=new Meta(bola.get(bola.size() - 1).getTailX() + Settings.GAP,0,50,Settings.GAME_HEIGHT,Settings.VELOCITY_HAZZARD);
         addActor(fin);
 
     }
@@ -165,6 +189,11 @@ public class ScrollHandler extends Group {
             return true;
         }else if(abajo2.collides(nave)){
             return true;
+        }
+        for(Esferic bolica : bola){
+            if (bolica.collides(nave)) {
+                return true;
+            }
         }
 
 

@@ -30,6 +30,8 @@ public class AssetManager {
     public static Sprite barraH;
     public static Sprite barraup;
     public static Texture barraup1;
+    public static Sprite esfera;
+    public static Texture esfera1;
 
     public static Sprite barrap;
     public static Texture barrap1;
@@ -80,6 +82,11 @@ public class AssetManager {
         fondo = new TextureRegion(fondoIMG);
 
         fondo.flip(false, false);
+
+        esfera1 = new Texture(Gdx.files.internal("esferic.png"));
+        //  spaceship.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);
+        esfera = new Sprite(esfera1);
+        esfera.flip(false,true);
 
 
         //fondo.setFilter(Texture.TextureFilter.Nearest,Texture.TextureFilter.Nearest);

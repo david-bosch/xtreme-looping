@@ -93,7 +93,9 @@ public class GameScreen implements Screen {
             batch.end();
 
             explosionTime += delta;
-       //     stage.getRoot().findActor("theship").remove();
+            AssetManager.music.stop();
+       //
+//                stage.getRoot().findActor("theship").remove();
         }
 
 
