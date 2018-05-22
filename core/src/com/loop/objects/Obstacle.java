@@ -20,4 +20,5 @@ public class Obstacle extends  Scrollable{
 
     }
 
+
 }

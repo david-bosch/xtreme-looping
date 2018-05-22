@@ -3,8 +3,10 @@ package com.loop.helpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.loop.objects.Disturbed;
@@ -38,7 +40,7 @@ public class AssetManager {
 
     public static Sprite meta;
     public static Texture meta1;
-
+    public static BitmapFont font;
 
 
     public static Texture barra;
@@ -47,6 +49,11 @@ public class AssetManager {
     public static Animation explosionAnim;
 
     public static void load() {
+
+        FileHandle fontFile = Gdx.files.internal("fonts/space.fnt");
+
+        font = new BitmapFont(fontFile, true);
+        font.getData().setScale(0.4f);
 
         sheet=new Texture(Gdx.files.internal("sheet.png"));
 
@@ -95,7 +102,7 @@ public class AssetManager {
         music.setVolume(0.2f);
         music.setLooping(true);
 
-        //  boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
+          boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
 
         //  record = Gdx.audio.newSound(Gdx.files.internal("record.wav"));
 
@@ -118,7 +125,7 @@ public class AssetManager {
     public static void dispose(){
         spaceship.dispose();
         fondoIMG.dispose();
-      //  boom.dispose();
+        boom.dispose();
         music.dispose();
     //    record.dispose();
     }

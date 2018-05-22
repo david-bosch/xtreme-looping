@@ -288,4 +288,13 @@ public class Ship extends Actor{
     public Rectangle getCollisionRect() {
         return collisionRect;
     }
+
+    public void reset() {
+
+        // La posem a la posició inicial i a l'estat normal
+        position.x = Settings.SPACECRAFT_STARTX;
+        position.y = Settings.SPACECRAFT_STARTY;
+        direction = SPACECRAFT_STRAIGHT;
+        collisionRect = new Rectangle();
+    }
 }

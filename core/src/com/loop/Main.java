@@ -22,6 +22,7 @@ public class Main extends Game {
 		AssetManager.load();
 		setScreen(new GameScreen());
 
+
 	}
 	@Override
 	public void dispose(){

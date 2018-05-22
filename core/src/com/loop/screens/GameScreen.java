@@ -1,25 +1,30 @@
 package com.loop.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.loop.Main;
 import com.loop.control.Control;
 import com.loop.helpers.AssetManager;
 import com.loop.objects.ScrollHandler;
 import com.loop.objects.Ship;
 import com.loop.utils.Settings;
 
+
+
 /**
  * Created by infot on 24/04/18.
  */
 
 public class GameScreen implements Screen {
-
+    private GlyphLayout textLayout;
     Boolean gameOver = false;
     Boolean endGame = false;
     private ShapeRenderer shapeRenderer;
@@ -29,13 +34,18 @@ public class GameScreen implements Screen {
     public Ship nau;
     ScrollHandler scroller;
     private float explosionTime = 0;
+    long totalTiempo;
+    long tiempoInicio;
+    Main main=new Main();
 
 
     public GameScreen(){
+        tiempoInicio = System.currentTimeMillis();
         AssetManager.music.play();
         shapeRenderer = new ShapeRenderer();
 
-
+        textLayout = new GlyphLayout();
+        textLayout.setText(AssetManager.font, "GameOver");
         OrthographicCamera camera = new OrthographicCamera(Settings.GAME_WIDTH, Settings.GAME_HEIGHT);
 
         camera.setToOrtho(true);
@@ -78,7 +88,7 @@ public class GameScreen implements Screen {
                 endGame=true;
             }
             if (scroller.collides(nau)) {
-                //  AssetManager.boom.play();
+                AssetManager.boom.play();
 
 
 
@@ -88,14 +98,54 @@ public class GameScreen implements Screen {
             }
         if(gameOver){
             // Si hi ha hagut col·lisió: reproduïm l'explosió
-            batch.begin();
-            batch.draw((TextureRegion) AssetManager.explosionAnim.getKeyFrame(explosionTime, false), (nau.getX() + nau.getWidth() / 2) - 32, nau.getY() + nau.getHeight() / 2 - 32, 64, 64);
-            batch.end();
 
-            explosionTime += delta;
             AssetManager.music.stop();
+
+
+                batch.begin();
+                batch.draw((TextureRegion) AssetManager.explosionAnim.getKeyFrame(explosionTime, false), (nau.getX() + nau.getWidth() / 2) - 32, nau.getY() + nau.getHeight() / 2 - 32, 64, 64);
+            AssetManager.font.draw(batch, textLayout, Settings.GAME_WIDTH/2 - textLayout.width/2, Settings.GAME_HEIGHT/2 - textLayout.height/2);
+                batch.end();
+
+                explosionTime += delta;
+            AssetManager.load();
+            main.setScreen(new GameScreen());
+
+            //nau.reset();
+            Settings.VELOCITY_HAZZARD=0;
+
+            try {
+                Thread.sleep(500);
+                System.exit(0);
+
+            }catch (Exception e){
+
+            }
+
+
+
        //
 //                stage.getRoot().findActor("theship").remove();
+        }
+        if(endGame){
+             batch.begin();
+            totalTiempo = System.currentTimeMillis() - tiempoInicio;
+
+            textLayout.setText(AssetManager.font, "Your Time: "+totalTiempo);
+            AssetManager.font.draw(batch, textLayout, Settings.GAME_WIDTH/2 - textLayout.width/2, Settings.GAME_HEIGHT/2 - textLayout.height/2);
+            batch.end();
+          //  main.setScreen(this);
+            //stage.dispose();
+            nau.reset();
+
+            try {
+                Thread.sleep(2000);
+                System.exit(0);
+
+            }catch (Exception e){
+
+            }
+
         }
 
 
