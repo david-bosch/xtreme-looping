@@ -22,11 +22,7 @@ public class BarraP extends Obstacle {
 
         this.position=new Vector2(x,y);
     }
-    public void setOrigin() {
 
-        this.setOrigin(width/2 + 1, height/2);
-
-    }
 
     @Override
     public void act(float delta) {

@@ -56,7 +56,7 @@ public class ScrollHandler extends Group {
         addActor(barrap);
         r = new Random();
 
-        num = 10;
+        num = 60;
         num2=10;
         num3=30;
         float newSize = Methods.randomFloat(Settings.MIN_FACE, Settings.MAX_FACE) * 34;

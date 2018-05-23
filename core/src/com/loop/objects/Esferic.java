@@ -36,7 +36,7 @@ public class Esferic extends Obstacle {
         // Actualitzem el cecrcle de col·lisions (punt central de l'asteroid i el radi.
         hitbox.set(position.x + width / 2.0f, position.y + width / 2.0f, width / 2.0f);
 
-        //     Gdx.app.log("LifeCycle", ""+Settings.VELOCITY_HAZZARD);
+
         setVelocity(Settings.VELOCITY_HAZZARD);
         position.y=position.y+u;
     }

@@ -21,11 +21,7 @@ public class Meta extends Obstacle {
         setOrigin();
     }
 
-    public void setOrigin() {
 
-        this.setOrigin(width/2 + 1, height/2);
-
-    }
 
     @Override
     public void act(float delta) {
@@ -35,7 +31,7 @@ public class Meta extends Obstacle {
         hitbox.set(position.x, position.y, width-4, height-2);
         setBounds(position.x, position.y, width-8, height-2);
 
-        //     Gdx.app.log("LifeCycle", ""+Settings.VELOCITY_HAZZARD);
+
         setVelocity(Settings.VELOCITY_HAZZARD);
 
     }

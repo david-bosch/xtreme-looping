@@ -33,11 +33,7 @@ public class BarraH extends Obstacle {
 
         setOrigin();
     }
-    public void setOrigin() {
 
-        this.setOrigin(width/2 + 1, height/2);
-
-    }
 
     @Override
     public void act(float delta) {

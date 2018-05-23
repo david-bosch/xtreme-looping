@@ -24,6 +24,7 @@ import com.loop.utils.Settings;
  */
 
 public class GameScreen implements Screen {
+    int num=1;
     private GlyphLayout textLayout;
     Boolean gameOver = false;
     Boolean endGame = false;
@@ -84,17 +85,19 @@ public class GameScreen implements Screen {
 
 
             if(scroller.end(nau)){
-                Gdx.app.log("App", "Succes as fuck");
+                //Gdx.app.log("App", "Succes as fuck");
                 endGame=true;
             }
             if (scroller.collides(nau)) {
+                if(num==1){
                 AssetManager.boom.play();
-
+              }
 
 
 //                stage.getRoot().findActor("theship").remove();
 
                 gameOver = true;
+                num++;
             }
         if(gameOver){
             // Si hi ha hagut col·lisió: reproduïm l'explosió
@@ -109,18 +112,12 @@ public class GameScreen implements Screen {
 
                 explosionTime += delta;
             AssetManager.load();
-            main.setScreen(new GameScreen());
+          //  main.setScreen(new GameScreen());
 
             //nau.reset();
             Settings.VELOCITY_HAZZARD=0;
 
-            try {
-                Thread.sleep(500);
-                System.exit(0);
-
-            }catch (Exception e){
-
-            }
+            AssetManager.boom.stop();
 
 
 
@@ -131,20 +128,15 @@ public class GameScreen implements Screen {
              batch.begin();
             totalTiempo = System.currentTimeMillis() - tiempoInicio;
 
-            textLayout.setText(AssetManager.font, "Your Time: "+totalTiempo);
+            textLayout.setText(AssetManager.font, "YOU WIN!!");
             AssetManager.font.draw(batch, textLayout, Settings.GAME_WIDTH/2 - textLayout.width/2, Settings.GAME_HEIGHT/2 - textLayout.height/2);
             batch.end();
           //  main.setScreen(this);
             //stage.dispose();
             nau.reset();
+            Settings.VELOCITY_HAZZARD=0;
 
-            try {
-                Thread.sleep(2000);
-                System.exit(0);
 
-            }catch (Exception e){
-
-            }
 
         }
 

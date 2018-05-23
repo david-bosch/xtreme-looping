@@ -19,13 +19,13 @@ import com.loop.objects.Disturbed;
 public class AssetManager {
     public static Texture spaceship;
 
-    //public static Texture fondo;
+
     public static Texture fondoIMG;
     public static TextureRegion fondo;
     public static Sprite lanave;
     public static Music music;
     public static Sound boom;
-    public static Sound record;
+
     public static Sprite face;
     public static Texture face1;
     public static Texture sheet;
@@ -104,7 +104,7 @@ public class AssetManager {
 
           boom = Gdx.audio.newSound(Gdx.files.internal("boom.wav"));
 
-        //  record = Gdx.audio.newSound(Gdx.files.internal("record.wav"));
+
 
 
         // Creem els 16 estats de l'explosió
@@ -127,6 +127,6 @@ public class AssetManager {
         fondoIMG.dispose();
         boom.dispose();
         music.dispose();
-    //    record.dispose();
+
     }
 }
